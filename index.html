@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 32nd Birthday Hazel 🎂</title>
+
+<style>
+:root {
+    --pink: #ff6fae;
+    --dark-pink: #bd467c;
+    --light-pink: #fff0f6;
+    --text: #78445e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f7, #f7d8e7, #ffe8ef);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+#stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.card {
+    position: relative;
+    z-index: 1;
+    width: min(900px, 100%);
+    padding: 35px 25px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 15px 50px rgba(160, 65, 110, 0.15);
+    backdrop-filter: blur(12px);
+}
+
+.subtitle {
+    color: #b76a8b;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+.photo-frame {
+    width: 205px;
+    height: 205px;
+    margin: 0 auto 24px;
+    padding: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d8a56e, white, #e7a0c0);
+    box-shadow: 0 10px 30px #bd467c25;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 7vw, 65px);
+    font-weight: normal;
+    line-height: 1.1;
+    color: #98466e;
+}
+
+h2 {
+    margin-top: 12px;
+    color: #bd6790;
+    font-size: 22px;
+}
+
+.message {
+    max-width: 580px;
+    margin: 22px auto;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #80586c;
+}
+
+.divider {
+    width: 65px;
+    height: 2px;
+    margin: 24px auto;
+    background: #d998b5;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 13px 20px;
+    border: 1px solid #efc0d5;
+    border-radius: 30px;
+    background: #fffafd;
+    color: #91466c;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s;
+    box-shadow: 0 5px 15px #9c4b7015;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    background: #ffe5f0;
+}
+
+.btn.primary {
+    color: white;
+    background: linear-gradient(135deg, #e66da8, #bd467c);
+    border: none;
+}
+
+.footer {
+    margin-top: 28px;
+    color: #b77b97;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    padding: 18px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(62, 25, 47, 0.65);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: min(440px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px 25px;
+    border-radius: 22px;
+    background: #fffafd;
+    color: var(--text);
+    box-shadow: 0 20px 60px #30132240;
+    animation: appear 0.25s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content h3 {
+    margin: 12px 0;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: normal;
+    color: #a34875;
+}
+
+.modal-content p {
+    margin: 12px 0;
+    line-height: 1.8;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    border: none;
+    background: none;
+    color: #a34875;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.wish {
+    margin: 10px 0;
+    padding: 13px;
+    border-radius: 12px;
+    background: #fff0f6;
+    line-height: 1.6;
+}
+
+.audio-box {
+    display: none;
+    margin: 20px auto 0;
+    padding: 18px;
+    max-width: 480px;
+    border-radius: 16px;
+    background: #fff0f6;
+}
+
+.audio-box.show {
+    display: block;
+}
+
+audio {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    z-index: 0;
+    pointer-events: none;
+    animation: rise 6s linear forwards;
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) translateX(var(--drift));
+        opacity: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 27px 16px;
+        border-radius: 22px;
+    }
+
+    .photo-frame {
+        width: 165px;
+        height: 165px;
+    }
+
+    .buttons {
+        gap: 9px;
+    }
+
+    .btn {
+        flex: 1 1 calc(50% - 9px);
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<main class="card">
+
+    <p class="subtitle">A little celebration, just for you</p>
+
+    <div class="photo-frame">
+        <img src="hazel.jpeg" alt="Hazel" class="photo">
+    </div>
+
+    <h1>Happy Birthday,<br>Hazel 💗</h1>
+    <h2>Chapter 32 ✨</h2>
+
+    <p class="message">
+        Dear Hazel,<br>
+        May your special day bring you happiness, beautiful memories,
+        unexpected smiles, and countless reasons to feel grateful.
+        Here's to a wonderful new chapter filled with love, laughter,
+        and dreams coming true. You deserve the very best! 💕
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="buttons">
+        <button class="btn" onclick="openModal('letterModal')">
+            💌 Open Your Letter
+        </button>
+
+        <a class="btn primary" href="cake.html">
+            🎂 Cut the Cake
+        </a>
+
+        <button class="btn" onclick="toggleMusic()">
+            🎵 Birthday Audio
+        </button>
+
+        <button class="btn" onclick="openModal('wishesModal')">
+            ✨ Birthday Wishes
+        </button>
+
+        <button class="btn" onclick="surprise()">
+            🎉 A Little Surprise
+        </button>
+    </div>
+
+    <div class="audio-box" id="audioBox">
+        <p>🎶 A birthday melody for Hazel</p>
+        <audio id="birthdayAudio" controls loop>
+            <source src="birthday.mpeg" type="audio/mpeg">
+            Your browser does not support audio.
+        </audio>
+    </div>
+
+    <p class="footer">MADE WITH CARE, FOR HAZEL ♡</p>
+
+</main>
+
+<div class="modal" id="letterModal" onclick="outsideClose(event, this)">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal('letterModal')">&times;</button>
+
+        <h3>💌 A Little Letter</h3>
+
+        <p>Dear Hazel,</p>
+
+        <p>
+            Happy 32nd Birthday! I hope this year brings you peace,
+            happiness, confidence, and beautiful new beginnings.
+        </p>
+
+        <p>
+            May you always have reasons to smile, people who genuinely
+            care about you, and the courage to follow your dreams.
+            May the little things make you happy and the big things
+            bring you closer to everything you wish for.
+        </p>
+
+        <p>
+            Keep shining in your own way. Wishing you a lovely birthday
+            and an even more beautiful year ahead. 💗
+        </p>
+
+        <p>With warm wishes, ♡</p>
+    </div>
+</div>
+
+<div class="modal" id="wishesModal" onclick="outsideClose(event, this)">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal('wishesModal')">&times;</button>
+
+        <h3>✨ Birthday Wishes</h3>
+
+        <div class="wish">🌷 May your heart always find happiness and peace.</div>
+        <div class="wish">🌟 May your dreams become beautiful realities.</div>
+        <div class="wish">💗 May you always feel loved and appreciated.</div>
+        <div class="wish">🎂 May Chapter 32 be one of your best chapters yet!</div>
+    </div>
+</div>
+
+<script>
+function openModal(id) {
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+}
+
+function outsideClose(event, modal) {
+    if (event.target === modal) {
+        modal.classList.remove("show");
+    }
+}
+
+function toggleMusic() {
+    const box = document.getElementById("audioBox");
+    const audio = document.getElementById("birthdayAudio");
+
+    box.classList.toggle("show");
+
+    if (box.classList.contains("show")) {
+        audio.play().catch(() => {});
+    } else {
+        audio.pause();
+    }
+}
+
+function spawnHearts(count = 12) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.textContent = ["💗", "💕", "💖", "♡"][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (18 + Math.random() * 20) + "px";
+            heart.style.setProperty("--drift", (Math.random() * 160 - 80) + "px");
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }, i * 180);
+    }
+}
+
+function surprise() {
+    spawnHearts(22);
+}
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let stars = [];
+
+function resizeStars() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    stars = Array.from({
+        length: Math.floor((canvas.width * canvas.height) / 9000)
+    }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.4,
+        alpha: Math.random()
+    }));
+}
+
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(star => {
+        star.alpha += (Math.random() - 0.5) * 0.08;
+        star.alpha = Math.max(0.15, Math.min(1, star.alpha));
+
+        ctx.globalAlpha = star.alpha;
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawStars);
+}
+
+window.addEventListener("resize", resizeStars);
+resizeStars();
+drawStars();
+
+setTimeout(() => spawnHearts(6), 900);
+
+window.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        document.querySelectorAll(".modal").forEach(modal => {
+            modal.classList.remove("show");
+        });
+    }
+});
+</script>
+
+</body>
+</html>

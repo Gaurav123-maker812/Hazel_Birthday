@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut the Cake, Hazel! 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #79435c;
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f7, #f6d4e4, #ffe8ef);
+    overflow-x: hidden;
+}
+
+.page {
+    width: min(650px, 100%);
+    padding: 30px 20px;
+    border: 1px solid white;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 15px 45px #a34c771a;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 7vw, 48px);
+    font-weight: normal;
+    color: #a34875;
+}
+
+.subtitle {
+    margin-top: 12px;
+    line-height: 1.7;
+    color: #98677e;
+}
+
+.cake-area {
+    position: relative;
+    width: min(360px, 100%);
+    height: 310px;
+    margin: 30px auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plate {
+    position: absolute;
+    width: 100%;
+    height: 28px;
+    bottom: 25px;
+    border-radius: 50%;
+    background: linear-gradient(#fff, #e6d5df);
+    box-shadow: 0 7px 12px #8b4c6c25;
+}
+
+.cake {
+    position: absolute;
+    bottom: 47px;
+    width: 260px;
+    height: 170px;
+    transition: transform 1s ease;
+}
+
+.layer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    border-radius: 13px 13px 17px 17px;
+    background: linear-gradient(90deg, #b85a76, #e99aaf 45%, #c56a89);
+    border-bottom: 7px solid #a84f70;
+    box-shadow: inset 0 -8px 0 #f6c4d2;
+}
+
+.layer.bottom {
+    bottom: 0;
+    height: 70px;
+}
+
+.layer.top {
+    bottom: 63px;
+    height: 68px;
+    background: linear-gradient(90deg, #f7c7d8, #fff0f5, #f3b8cf);
+    border-bottom: 8px solid #e89bb8;
+}
+
+.icing {
+    position: absolute;
+    left: 0;
+    top: 36px;
+    width: 100%;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff1f6;
+    z-index: 2;
+}
+
+.drip {
+    position: absolute;
+    top: 47px;
+    left: 25px;
+    width: 17px;
+    height: 28px;
+    background: #fff1f6;
+    border-radius: 0 0 12px 12px;
+    z-index: 3;
+}
+
+.drip.two {
+    left: 80px;
+    height: 20px;
+}
+
+.drip.three {
+    left: 175px;
+    height: 30px;
+}
+
+.drip.four {
+    left: 220px;
+    height: 19px;
+}
+
+.decorations {
+    position: absolute;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+    color: #c54d83;
+    font-size: 19px;
+    letter-spacing: 10px;
+}
+
+.candle {
+    position: absolute;
+    z-index: 5;
+    bottom: 180px;
+    width: 12px;
+    height: 48px;
+    border-radius: 4px;
+    background: repeating-linear-gradient(
+        135deg,
+        #fff 0 6px,
+        #ff83b8 6px 12px
+    );
+}
+
+.candle.one { left: 105px; }
+.candle.two { left: 124px; }
+.candle.three { left: 143px; }
+
+.flame {
+    position: absolute;
+    top: -19px;
+    left: 1px;
+    width: 10px;
+    height: 17px;
+    border-radius: 50% 50% 45% 45%;
+    background: #ffad32;
+    box-shadow: 0 0 15px #ffad32;
+    animation: flicker .45s infinite alternate;
+    transform-origin: bottom;
+}
+
+@keyframes flicker {
+    from { transform: rotate(-8deg) scale(1); }
+    to { transform: rotate(8deg) scale(1.12); }
+}
+
+.knife {
+    position: absolute;
+    z-index: 6;
+    top: 25px;
+    right: 35px;
+    width: 125px;
+    height: 14px;
+    border-radius: 3px 10px 10px 3px;
+    background: linear-gradient(#fff, #b8bec8, #fff);
+    box-shadow: 0 2px 5px #60404d30;
+    transform: rotate(-35deg);
+    transform-origin: right center;
+    transition: transform .8s ease, top .8s ease, right .8s ease;
+}
+
+.knife::after {
+    content: "";
+    position: absolute;
+    right: -36px;
+    top: -2px;
+    width: 42px;
+    height: 18px;
+    border-radius: 4px 10px 10px 4px;
+    background: #9b4e71;
+}
+
+.cake.cut .knife {
+    top: 125px;
+    right: 110px;
+    transform: rotate(65deg);
+}
+
+.cake.cut .layer.top {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 56% 100%, 50% 30%, 44% 100%, 0 100%);
+}
+
+.cake.cut .layer.bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 56% 100%, 50% 30%, 44% 100%, 0 100%);
+}
+
+.cake.cut {
+    animation: cakeCut .8s ease forwards;
+}
+
+@keyframes cakeCut {
+    0% { transform: translateX(0); }
+    45% { transform: translateX(0) scale(1.02); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 13px 23px;
+    margin: 7px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #e66da8, #bd467c);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 7px 18px #a3487525;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn:disabled {
+    opacity: .65;
+    cursor: default;
+    transform: none;
+}
+
+.result {
+    display: none;
+    margin: 15px auto 20px;
+    color: #a34875;
+    font-family: Georgia, serif;
+    font-size: clamp(23px, 5vw, 30px);
+    line-height: 1.5;
+}
+
+.result.show {
+    display: block;
+    animation: reveal .6s ease;
+}
+
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sparkle {
+    position: fixed;
+    top: -30px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(500deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .page { padding: 26px 12px; }
+    .cake-area { transform: scale(.9); transform-origin: top center; margin-bottom: 0; }
+    .btn { width: min(270px, 100%); margin: 7px auto; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+    <h1>It's Cake Time, Hazel! 🎂</h1>
+
+    <p class="subtitle">
+        Make a wish, take a deep breath, and get ready to cut your birthday cake. 💗
+    </p>
+
+    <div class="cake-area">
+        <div class="plate"></div>
+
+        <div class="cake" id="cake">
+            <div class="layer bottom"></div>
+            <div class="layer top"></div>
+            <div class="icing"></div>
+            <div class="drip"></div>
+            <div class="drip two"></div>
+            <div class="drip three"></div>
+            <div class="drip four"></div>
+            <div class="decorations">♥ ♥ ♥</div>
+
+            <div class="candle one"><div class="flame"></div></div>
+            <div class="candle two"><div class="flame"></div></div>
+            <div class="candle three"><div class="flame"></div></div>
+
+            <div class="knife"></div>
+        </div>
+    </div>
+
+    <p class="result" id="result">
+        🎉 Happy 32nd Birthday, Hazel! 🎉<br>
+        Make a wish and let the magic begin! 💖
+    </p>
+
+    <button class="btn" id="cutButton" onclick="cutCake()">
+        🔪 Cut the Cake
+    </button>
+
+    <button class="btn" id="candlesButton" onclick="blowCandles()" disabled>
+        🌬️ Blow Out Candles
+    </button>
+
+    <br>
+
+    <a class="btn" href="index.html">← Back to Birthday Page</a>
+</main>
+
+<script>
+let hasCut = false;
+let candlesOut = false;
+
+function cutCake() {
+    if (hasCut) return;
+
+    hasCut = true;
+
+    const cake = document.getElementById("cake");
+    const button = document.getElementById("cutButton");
+    const candlesButton = document.getElementById("candlesButton");
+
+    cake.classList.add("cut");
+    button.textContent = "🎂 Cake Cut!";
+    button.disabled = true;
+
+    setTimeout(() => {
+        document.getElementById("result").classList.add("show");
+        candlesButton.disabled = false;
+        makeConfetti(70);
+    }, 850);
+}
+
+function blowCandles() {
+    if (candlesOut) return;
+
+    candlesOut = true;
+
+    document.querySelectorAll(".flame").forEach(flame => {
+        flame.style.display = "none";
+    });
+
+    document.getElementById("candlesButton").textContent = "💗 Wish Made!";
+    document.getElementById("result").innerHTML =
+        "✨ Your wish is on its way, Hazel! ✨<br>May Chapter 32 be full of happiness. 💕";
+
+    makeConfetti(100);
+}
+
+function makeConfetti(count) {
+    const symbols = ["💗", "✨", "🎉", "💕", "★"];
+
+    for (let i = 0; i < count; i++) {
+        const piece = document.createElement("span");
+
+        piece.className = "sparkle";
+        piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.fontSize = (12 + Math.random() * 17) + "px";
+        piece.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => piece.remove(), 4200);
+    }
+}
+</script>
+
+</body>
+</html>
